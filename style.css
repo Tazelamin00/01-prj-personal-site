@@ -3,25 +3,48 @@
     padding: 0;
     border: none
 }
+@font-face {
+    font-family: 'Neue Montreal-Regular';
+    src: url(fonts/NeueMontreal-Regular.otf);
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Neue Montreal-Bold';
+    src: url(fonts/NeueMontreal-Bold.otf);
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Neue Montreal-Light';
+    src: url(fonts/NeueMontreal-Light.otf);
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ChicagoFLF';
+    src: url(fonts/ChicagoFLF.ttf);
+    font-style: normal;
+}
+
+
 body{
     height: 100%;
     overflow: hidden;
     background-image: url(img/background.jpg);
     background-size:cover;
-
-    font-family: Arial, Helvetica, sans-serif;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: 'Neue Montreal-Regular', Arial, Helvetica, sans-serif;
 }
-
+/* HEADER */
 header{
+    
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-
     .logo{
         position: fixed;
         left: 20px;
         top: 20px;
-        width: 140px;
+        width: 80px;
         height: auto;
     }
     .navigation_links{
@@ -29,7 +52,6 @@ header{
         ul{
             list-style: none;
             display: block;
-
             li a{
                 display: inline-block;
                 padding: 0.5em;
@@ -37,7 +59,6 @@ header{
                 text-decoration: none;
                 color: #000;
                 font-size: 16px;
-
                 transition: color 0.3s ease;
 
                 &:hover{
@@ -51,9 +72,8 @@ header{
         display: flex;
         flex-direction: column;
         text-align: right;
-        padding: 40px;
         p{
-            padding: 0.5em;
+            padding-bottom: 1.25em;
             font-size: 12px;
             color: #000;
         }
@@ -63,8 +83,8 @@ header{
 marquee{
     font-family: 'Courier New', Courier, monospace;
     font-size: 14px;
-    color: #FA5A28;
-    padding: 4px;
+    margin-top: 20px;
+    padding: 4px 24px;
 }
 
 main{
@@ -74,14 +94,39 @@ main{
     justify-content: center;
     padding: 24px;
 
-    .name_description{
-        padding: 1em;
+    .name_occupation{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1em;
         h2{
+            font-family: 'Neue Montreal-Bold', Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
             text-align: center;
-            font-size: 18px;
+            color: #000;
+        }
+        p{
+            font-family: 'Neue Montreal-Light', Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            text-align: center;    
+            line-height: 1.5;
+            display: block;
             color: #000;
         }
     }
+
+    .name_description{
+        padding: 1em;
+        h2{
+            font-family: 'Neue Montreal-Bold', Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            color: #000;
+        }
+    }
+
     .skillset_pic{
         display: flex;
         justify-content: space-between;
@@ -100,7 +145,7 @@ main{
             p{
                 padding: 0.5em;
                 font-size: 20px;
-                font-weight: bolder;
+                font-weight: 100;
             }
             ul {
                 list-style: none;
@@ -117,11 +162,12 @@ main{
     }
     
     .information{
-        display: block;
-        font-weight: 100;
+        font-family: 'Neue Montreal-Light', Arial, Helvetica, sans-serif;
         font-size: 14px;
-        color: #000;
         text-align: center;    
+        line-height: 1.5;
+        display: block;
+        color: #000;
     }
     .footer{
         position: fixed;
@@ -166,4 +212,68 @@ padding-top: 48px;    }
     }
 }
 
+    /* WORK PAGE ONLY: keeps this page different from the others */
+    .work_page header{
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        min-height: 120px;
+    }
 
+    /* Keeps personal info on the right side of the work page */
+    .work_page header .personal_info{
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        text-align: right;
+    }
+
+    /* Centers the work page content area on the screen */
+    .work_page main{
+        min-height: calc(100vh - 120px);
+        justify-content: center;
+        padding-top: 0;
+    }
+
+    /* Keeps name and occupation directly above the image row */
+    .work_page .name_occupation{
+        margin-bottom: 12px;
+    }
+
+    /* Container for About (left), image (center), and Work (right) */
+    .work_page .work_image_navigation{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+        margin-top: 0;
+    }
+
+    /* Reusable style for the three links */
+    .work_page .work_link{
+        font-family: 'Courier New', Courier, monospace;
+        text-decoration: none;
+        color: #000;
+        font-size: 16px;
+    }
+
+    .work_page .work_link:hover{
+        color: #FA5A28;
+        text-decoration: underline;
+    }
+
+    /* Places Github below the image area */
+    .work_page .work_bottom_link{
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Moves the centered name + image + navigation block upward together */
+    .work_page .name_occupation,
+    .work_page .work_image_navigation,
+    .work_page .work_bottom_link{
+        position: relative;
+        top: -100px;
+    }
