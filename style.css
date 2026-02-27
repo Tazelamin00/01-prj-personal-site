@@ -134,7 +134,7 @@ main{
         align-items: center;
         
         .personal_picture{
-        width: 240px;
+        width: 100px;
         height: auto;
         position: relative;
         margin-bottom: 60px;
@@ -169,6 +169,36 @@ main{
         display: block;
         color: #000;
     }
+
+    .about_description{
+        /* Keeps heading, image, and paragraph stacked in the center */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1em;
+        h2{
+            font-family: 'Neue Montreal-Bold', Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            color: #000;
+        }
+        .personal_picture{
+            display: block;
+            width: 180px;
+            height: auto;
+            position: relative;
+            top: 48px;
+            margin-bottom: 108px;
+        }
+        p{
+            margin-top: 0;
+            text-align: center;
+        }
+    }
+
+
+
     .footer{
         position: fixed;
         right: 16px;
@@ -268,6 +298,28 @@ padding-top: 48px;    }
         width: 100%;
         text-align: center;
         margin-top: 20px;
+    }
+
+    /* Keeps work page footer perfectly centered across the full width */
+    .work_page .footer{
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    /* Ensures email text is centered in the middle footer column */
+    .work_page .footer p:nth-of-type(1){
+        justify-self: center;
+        text-align: center;
+    }
+
+    /* Aligns the copyright line to the right side with personal info */
+    .work_page .footer p:nth-of-type(2){
+        grid-column: 3;
+        justify-self: end;
+        text-align: right;
+        margin-right: 20px;
+        margin-top: 0;
     }
 
     /* Moves the centered name + image + navigation block upward together */
