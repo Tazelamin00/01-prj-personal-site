@@ -3,6 +3,10 @@
     padding: 0;
     border: none
 }
+
+html{
+    height: 100%;
+}
 @font-face {
     font-family: 'Neue Montreal-Regular';
     src: url(fonts/NeueMontreal-Regular.otf);
@@ -27,12 +31,22 @@
 
 body{
     height: 100%;
+    min-height: 100vh;
     overflow: hidden;
     background-image: url(img/background.jpg);
     background-size:cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Neue Montreal-Regular', Arial, Helvetica, sans-serif;
+}
+
+/* Keeps about page background exactly the same as index */
+.about_page{
+    background-image: url(img/background.jpg) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
 }
 /* HEADER */
 header{
@@ -224,7 +238,7 @@ main{
     }
     .footer p:nth-of-type(1){
         font-family: 'Courier New', Courier, monospace;
-        font-size: 16px;
+        font-size: 14px;
         grid-column: 2;
         justify-self: center;
 padding-top: 48px;    }
@@ -242,16 +256,18 @@ padding-top: 48px;    }
     }
 }
 
-    /* WORK PAGE ONLY: keeps this page different from the others */
-    .work_page header{
+    /* WORK + ABOUT PAGE: keep top header/nav spacing aligned */
+    .work_page header,
+    .about_page header{
         justify-content: space-between;
         align-items: center;
         padding: 20px;
         min-height: 120px;
     }
 
-    /* Keeps personal info on the right side of the work page */
-    .work_page header .personal_info{
+    /* Keeps personal info on the right side for work and about pages */
+    .work_page header .personal_info,
+    .about_page header .personal_info{
         position: fixed;
         right: 20px;
         top: 20px;
@@ -263,6 +279,63 @@ padding-top: 48px;    }
         min-height: calc(100vh - 120px);
         justify-content: center;
         padding-top: 0;
+        position: relative;
+    }
+
+    /* Centers work page content block (both width and height) */
+    .work_page .work_center_context{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Work page: two-column text block (heading left, list right) */
+    .work_page .name_description{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 160px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .work_page .name_description h2{
+        font-size: 16px;
+        text-align: left;
+        position: relative;
+        left: -120px;
+    }
+
+    .work_page .name_description ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        font-family: 'Neue Montreal-Bold', Arial, Helvetica, sans-serif;
+        font-size: 16px;
+    }
+
+    .work_page .name_description ul li{
+        padding-bottom: 0.25em;
+        font-size: inherit;
+        
+    }
+
+    /* Work page image sits behind the two-column text block */
+    .work_page .personal_picture{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 200px;
+        z-index: 1;
     }
 
     /* Keeps name and occupation directly above the image row */
@@ -307,8 +380,21 @@ padding-top: 48px;    }
         width: 100%;
     }
 
+    /* Keeps about page footer in the same position model as index */
+    .about_page .footer{
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
     /* Ensures email text is centered in the middle footer column */
     .work_page .footer p:nth-of-type(1){
+        justify-self: center;
+        text-align: center;
+    }
+
+    /* Keeps about page email in the same centered position as index */
+    .about_page .footer p:nth-of-type(1){
         justify-self: center;
         text-align: center;
     }
@@ -322,10 +408,82 @@ padding-top: 48px;    }
         margin-top: 0;
     }
 
+    /* Keeps about page reserved text aligned the same as index */
+    .about_page .footer p:nth-of-type(2){
+        grid-column: 3;
+        justify-self: end;
+        text-align: right;
+        margin-right: 20px;
+        margin-top: 0;
+    }
+
     /* Moves the centered name + image + navigation block upward together */
     .work_page .name_occupation,
     .work_page .work_image_navigation,
     .work_page .work_bottom_link{
         position: relative;
         top: -100px;
+    }
+
+    /* ABOUT link transition layer (index page) */
+    .page_transition{
+        position: fixed;
+        inset: 0;
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transition: none;
+    }
+
+    /* Active state shown right before page navigation */
+    .page_transition.is_active{
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Fade-out state used before opening about.html */
+    .page_transition.is_closing{
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    /* Full-screen transition video */
+    .page_transition .transition_video{
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: none;
+    }
+
+    /* Overlay content shown on top of transition video */
+    .page_transition .transition_content{
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+    }
+
+    .page_transition .transition_logo{
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        width: 80px;
+        height: auto;
+    }
+
+    .page_transition .transition_info{
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        text-align: right;
+        color: #fff;
+        font-family: 'Neue Montreal-Regular', Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
+
+    .page_transition .transition_info p{
+        margin-bottom: 1.25em;
     }
